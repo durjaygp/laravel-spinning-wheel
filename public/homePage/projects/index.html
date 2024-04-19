@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gainio - eSports and Gaming Template</title>
+
+    <link rel="shortcut icon" href="images/fav.png" type="image/x-icon">
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/fontawesome.min.css">
+    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="css/nice-select.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .carousel-cell {
+            width: 280px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+        @media (max-width: 1024px) {
+            .carousel-cell {
+                width: 20%;
+                margin-left: 4px;
+                margin-right: 4px;
+            }
+
+            .carousel-cell h4 {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .carousel-cell {
+                width: 20%;
+                margin-left: 4px;
+                margin-right: 4px;
+            }
+
+            .carousel-cell h4 {
+                font-size: 12px;
+            }
+        }
+
+        .carousel-cell.is-win img {
+            transform: scale(1.5);
+            transition: 1s ease-in;
+        }
+
+        .carousel-cell.is-win {
+            position: relative;
+            z-index: 20;
+        }
+
+        .carousel-cell img {
+            width: 100%;
+            height: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .carousel-cell.opacity-25 {
+            opacity: 0.25;
+            transition: opacity 1s ease-in;
+        }
+
+        .carousel-cell.is-win {
+            opacity: 1 !important;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+
+    <!-- Feature Game In start -->
+    <section id="feature-game-section">
+        <div class="overlay pt-120 pb-120">
+            <div class="container-fruid wow fadeInUp">
+                <div class="container">
+                    <div class="row justify-content-between">
+                        <div class="col-lg-6 col-md-9 col-sm-8">
+                            <div class="section-header">
+                                <h2 class="title">Spinning Wheel</h2>
+                                <p>Spin To Win</p>
+                            </div>
+                        </div>
+                        <div
+                            class="col-lg-3 col-md-3 col-sm-4 d-flex align-items-center justify-content-center justify-content-sm-end">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="position-relative mt-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                        class="bi bi-caret-down-fill position-absolute mx-auto text-warning"
+                        style="top: -60px; left: 0; right: 0;" viewBox="0 0 16 16">
+                        <path
+                            d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                    </svg>
+
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                        class="bi bi-caret-up-fill position-absolute mx-auto text-warning"
+                        style="bottom: -60px; left: 0; right: 0;" viewBox="0 0 16 16">
+                        <path
+                            d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+                    </svg>
+                    <div class="main-carousel">
+                        <div class="carousel-cell" id="item-1">
+                            <img src="images/game-1.png" alt="image">
+                            <h4>Test 01</h4>
+                        </div>
+                        <div class="carousel-cell" id="item-2">
+                            <img src="images/game-2.png" alt="image">
+                            <h4>Test 02</h4>
+                        </div>
+                        <div class="carousel-cell" id="item-3">
+                            <img src="images/game-3.png" alt="image">
+                            <h4>Test 03</h4>
+                        </div>
+                        <div class="carousel-cell" id="item-4">
+                            <img src="images/game-4.png" alt="image">
+                            <h4>Test 04</h4>
+                        </div>
+                        <div class="carousel-cell" id="item-5">
+                            <img src="images/game-5.png" alt="image">
+                            <h4>Test 05</h4>
+                        </div>
+                        <div class="carousel-cell" id="item-6">
+                            <img src="images/game-6.png" alt="image">
+                            <h4>Test 06</h4>
+                        </div>
+                        <div class="carousel-cell" id="item-7">
+                            <img src="images/game-7.png" alt="image">
+                            <h4>Test 07</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center" style="margin-top: 90px;">
+                    <a href="#" class="cmn-btn-alt cmn-btn" id="spin"> Spin <img src="images/double-right.png"
+                            alt="image"></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Feature Game In end -->
+
+    <!-- Footer Section start -->
+    <footer id="footer-section">
+        <div class="overlay">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="footer-top pt-120 pb-120">
+                            <div class="side-contant">
+                                <div class="left">
+                                    <img class="bg" src="images/footer-left-bg.png" alt="image">
+                                    <img class="bg circle" src="images/footer-left-circle.png" alt="image">
+                                    <img class="top" src="images/footer-left-top.png" alt="image">
+                                </div>
+                                <div class="right">
+                                    <img src="images/footer-right.png" alt="image">
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-lg-6 col-md-6 col-sm-10">
+                                    <div class="section-header text-center">
+                                        <h4 class="title">Want gaming &amp; esports news straight to your inbox?</h4>
+                                        <p>To Get Exclusive Benefits</p>
+                                    </div>
+                                    <form action="#">
+                                        <div class="subscribe">
+                                            <input type="email" placeholder="Enter Your Email Address">
+                                            <button class="btn">Subscribe</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom-area pt-120">
+                    <div class="row d-flex header-area">
+                        <div
+                            class="col-lg-8 col-md-8 d-flex justify-content-md-between justify-content-center align-items-center">
+                            <div class="logo-section">
+                                <a class="site-logo site-title" href="index.html"><img src="images/logo.png"
+                                        alt="site-logo"></a>
+                            </div>
+                            <ul class="navbar-nav main-menu d-flex align-items-center">
+                                <li><a href="index.html" class="active">Home</a></li>
+                                <li><a href="games.html">Games</a></li>
+                                <li><a href="tournaments.html">Tournaments</a></li>
+                            </ul>
+                        </div>
+                        <div
+                            class="col-lg-4 col-md-4 d-flex align-items-center justify-content-center justify-content-md-end">
+                            <div class="social-area d-flex">
+                                <a href="javascript:void(0)"><img src="images/twitter.png" alt="image"></a>
+                                <a href="javascript:void(0)"><img src="images/facebook.png" alt="image"></a>
+                                <a href="javascript:void(0)"><img src="images/linkedin.png" alt="image"></a>
+                                <a href="javascript:void(0)"><img src="images/google.png" alt="image"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="main-content">
+                    <div class="row d-flex justify-content-center">
+                        <div
+                            class="col-lg-8 col-md-8 col-sm-12 d-flex justify-content-start align-items-center justify-cen order-pro">
+                            <div class="left-area">
+                                <p>Copyright © Gainio | Designed by
+                                    <a href="https://themeforest.net/user/pixelaxis">Pixelasis</a>. ALL RIGHTS RESERVED
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 d-flex justify-content-end justify-cen">
+                            <div class="right-area">
+                                <select name="lang" style="display: none;">
+                                    <option value="en">English</option>
+                                    <option value="bn">Bangla</option>
+                                    <option value="hn">Hindi</option>
+                                </select>
+                                <div class="nice-select" tabindex="0"><span class="current">English</span>
+                                    <ul class="list">
+                                        <li data-value="en" class="option selected">English</li>
+                                        <li data-value="bn" class="option">Bangla</li>
+                                        <li data-value="hn" class="option">Hindi</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer-section end -->
+
+    <!-- JavaScript -->
+
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/slick.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/fontawesome.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/wow.js"></script>
+    <script src="js/main.js"></script>
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script>
+        var $carousel = $('.main-carousel').flickity({
+            // options
+            cellAlign: 'center',
+            contain: true,
+            draggable: false,
+            wrapAround: true,
+            prevNextButtons: false,
+            pageDots: false
+        });
+        var winNumber;
+        $("#spin").on("click", function () {
+            var flkty = $('.main-carousel').data('flickity');
+            if (document.querySelector('.is-win')) {
+                document.querySelector('.is-win').classList.remove('is-win');
+                for (i in flkty.cells) {
+                    flkty.cells[i].element.classList.remove('opacity-25');
+                }
+            }
+            var winNumber = Math.floor(Math.random() * flkty.cells.length) + 1;
+            var time = 6000;
+            var intervalTime = time / (time / 80);
+            var loop = 0;
+            var totalLoop = time / 80;
+            var spin = setInterval(() => {
+                if (loop < totalLoop) {
+                    // $carousel.flickity('selectCell', index);
+                    $carousel.flickity('next');
+                    loop++;
+                } else if (flkty.selectedIndex != winNumber - 1) {
+                    $carousel.flickity('next');
+                } else {
+                    flkty.selectedElements[0].classList.add('is-win')
+
+
+                    for (i in flkty.cells) {
+                        flkty.cells[i].element.classList.add('opacity-25');
+                    }
+
+                    clearInterval(spin);
+                }
+            }, intervalTime);
+            console.log(winNumber)
+        });
+    </script>
+</body>
+
+</html>

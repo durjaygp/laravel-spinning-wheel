@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Card Design</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .card {
+            width: 500px;
+            margin: 0 auto;
+        }
+
+        .wheel {
+            height: 200px;
+            width: 100%;
+            position: relative;
+            margin: 0 auto;
+            overflow: hidden;
+            border: 1px solid blue;
+        }
+
+        .wheel-inner {
+            position: absolute;
+        }
+
+        .wheel-item {
+            height: 200px;
+            width: 200px;
+            border-left: 1px solid black;
+            box-sizing: border-box;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        .wheel-item img {
+            width: 100%;
+        }
+
+        .wheel-needle {
+            position: absolute;
+            width: 3px;
+            height: 200px;
+            left: 50%;
+            right: 50%;
+            background-color: red;
+        }
+
+        .spin-button,
+        .remove-button {
+            margin-top: 10px;
+            display: block;
+            width: 200px;
+            height: 100px;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .spin-button {
+            background-color: #27ae60;
+            border: none;
+            color: white;
+        }
+
+        .remove-button {
+            background-color: #c0392b;
+            border: none;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body">
+            <div id="wheel-container" class="text-center">
+                <!-- Wheel container content -->
+            </div>
+        </div>
+        <div class="card-footer text-center">
+            <button class="btn btn-primary mr-2 spin-button" onclick="spinWheel();">Spin</button>
+            <button class="btn btn-danger remove-button" onclick="removeWheel();">Remove Wheel</button>
+        </div>
+    </div>
+</div>
+
+<script src="lib/velocity.min.js"></script>
+<script src="lib/wheel.js"></script>
+<script>
+    var items = [
+        {
+            id: 1,
+            name: "Item 1",
+            image: 'http://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FBRw7P7NYjV9-N24q4yCkP_gfeiHxjNS6sBz0-vDpNqmilKw-RE5MDv3cdTGIVM8ZF_WqFjtkOnn0Z-i_MOe5x-cbmw'
+        },
+        {
+            id: 2,
+            name: "Item 2",
+            image: 'http://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot7HxfDhjxszJemkV09-5gZKKkPLLMrfFqWdY781lxLuW8Njw31Dn8xc_YTqmJ4DDJFM2ZwqE_ATtx-u7g8C5vpjOzHM263E8pSGKJ1XuG9M'
+        },
+        {
+            id: 2,
+            name: "Item 2",
+            image: 'http://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot7HxfDhjxszJemkV09-5gZKKkPLLMrfFqWdY781lxLuW8Njw31Dn8xc_YTqmJ4DDJFM2ZwqE_ATtx-u7g8C5vpjOzHM263E8pSGKJ1XuG9M'
+        },
+        {
+            id: 2,
+            name: "Item 2",
+            image: 'http://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot7HxfDhjxszJemkV09-5gZKKkPLLMrfFqWdY781lxLuW8Njw31Dn8xc_YTqmJ4DDJFM2ZwqE_ATtx-u7g8C5vpjOzHM263E8pSGKJ1XuG9M'
+        },
+        {
+            id: 2,
+            name: "Item 2",
+            image: 'http://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot7HxfDhjxszJemkV09-5gZKKkPLLMrfFqWdY781lxLuW8Njw31Dn8xc_YTqmJ4DDJFM2ZwqE_ATtx-u7g8C5vpjOzHM263E8pSGKJ1XuG9M'
+        },
+        {
+            id: 2,
+            name: "Item 2",
+            image: 'http://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot7HxfDhjxszJemkV09-5gZKKkPLLMrfFqWdY781lxLuW8Njw31Dn8xc_YTqmJ4DDJFM2ZwqE_ATtx-u7g8C5vpjOzHM263E8pSGKJ1XuG9M'
+        },
+        {
+            id: 3,
+            name: "Item 3",
+            image: 'http://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpopujwezhjxszYI2gS092lnYmGmOHLPr7Vn35cpsB0j7qZoNn32QW2-xJoYGHzd9SWdwQ5ZgvYrFO9kOrn08XouJ_KyCR9-n51cFMXX4s'
+        },
+        {
+            id: 4,
+            name: "Item 4",
+            image: 'http://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot7HxfDhoyszJemkV4N27q4KcqPv9NLPF2GgEuJFyi-uTotT03A3h_hZlYWv2IdPAcAY8Y1vU-gPrw7rvjJ6-7ZnXiSw034A6uhk'
+        }
+    ];
+
+    items = items.map(function(item) {
+        return '<div class="item"><img src="' + item.image + '" /><div class="name">' + item.name + '</div></div>';
+    });
+
+    var currentNumber = 1;
+
+    // initialize wheel with options
+    Wheel.init('wheel-container', { duration: 6000, width: 200, items: items, prefix: 'wheel' });
+
+    for(var i = 1; i <= 1; i++) {
+        Wheel.prepare(i);
+        currentNumber = i;
+    }
+
+    function spinWheel() {
+        for(var i = 1; i <= Object.keys(Wheel.wheels).length; i++) {
+            Wheel.spin(i, '<img src="http://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpopujwezhjxszYI2gS092lnYmGmOHLPr7Vn35cpsB0j7qZoNn32QW2-xJoYGHzd9SWdwQ5ZgvYrFO9kOrn08XouJ_KyCR9-n51cFMXX4s" />');
+        }
+    }
+
+    function removeWheel() {
+        Wheel.remove(currentNumber);
+        currentNumber -= 1;
+    }
+</script>
+</body>
+</html>
