@@ -54,7 +54,7 @@ class AdminCategoryController extends Controller
         if ($category->name === 'Uncategorized')
             abort(404);
 
-        $category->recipe()->update(['category_id'=>$category_default_id]);
+        $category->category()->update(['category_id'=>$category_default_id]);
         $category->delete();
         return redirect()->back()->with('success', 'Category Has been deleted.');
     }

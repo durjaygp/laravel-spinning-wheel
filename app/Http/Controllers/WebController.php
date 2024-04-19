@@ -49,7 +49,6 @@ class WebController extends Controller
             $use_point = PointUse::where('user_id', $user)->sum('point');
             $left_point = $points - $use_point;
         } else {
-            // Set $left_point to 0 or handle it accordingly if there's no authenticated user
             $left_point = 0;
         }
         return view('frontEnd.home.index', compact('spins', 'left_point'));
