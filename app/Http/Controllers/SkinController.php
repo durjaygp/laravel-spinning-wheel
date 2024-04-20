@@ -39,7 +39,7 @@ class SkinController extends Controller
 
         Skin::create($skin);
 
-        return redirect()->route('skin.index')->with('success', 'skin created Successfully');
+        return redirect()->route('skin.index')->with('success', 'Case Category created Successfully');
     }
 
     /**
@@ -66,7 +66,7 @@ class SkinController extends Controller
 
         $skin->update($data);
 
-        return redirect()->route('skin.index')->with('success', 'skin updated Successfully');
+        return redirect()->route('skin.index')->with('success', 'Case Category updated Successfully');
     }
 
     /**

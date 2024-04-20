@@ -45,26 +45,27 @@
                         @csrf
                         @method('PUT')
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-8">
                                 <div class="mb-4">
                                     <label for="blog_title" class="form-label fw-semibold">Title</label>
                                     <input type="text" name="title" class="form-control" id="blog_title"
                                         value="{{ $gameCase->title }}" required>
                                 </div>
                             </div>
-
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="mb-4">
-                                    <label for="" class="form-label fw-semibold">Status</label>
-                                    <select name="status" class="form-select">
-                                        <option value=""> select status</option>
-                                        <option {{ $gameCase->status == 1 ? 'selected' : '' }} value="1"> Active
-                                        </option>
-                                        <option {{ $gameCase->status == 2 ? 'selected' : '' }} value="2"> Inactive
-                                        </option>
+                                    <label for="" class="form-label fw-semibold">Case Category</label>
+                                    <select name="skin_id" class="form-select" required>
+                                        <option value=""> Case Category</option>
+                                        @foreach($skins as $row)
+                                            <option value="{{$row->id}}" @if($row->id == $gameCase->skin_id) selected @endif> {{$row->title}}</option>
+                                        @endforeach
+
                                     </select>
                                 </div>
                             </div>
+
+
 
                             <div class="col-lg-12">
                                 <div class="mb-4">
@@ -86,10 +87,22 @@
                                     <img src="{{asset($gameCase->image)}}" alt="" class="img-fluid w-25">
                                 </div>
                             </div>
-                            <div class="col-lg-12">
+                            <div class="col-lg-6">
                                 <div class="mb-4">
                                     <label for="Image" class="form-label fw-semibold">Win Chances</label>
                                     <input type="number" name="win_chance" class="form-control" value="{{$gameCase->win_chance}}">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="mb-4">
+                                    <label for="" class="form-label fw-semibold">Status</label>
+                                    <select name="status" class="form-select">
+                                        <option value=""> select status</option>
+                                        <option {{ $gameCase->status == 1 ? 'selected' : '' }} value="1"> Active
+                                        </option>
+                                        <option {{ $gameCase->status == 2 ? 'selected' : '' }} value="2"> Inactive
+                                        </option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-12">

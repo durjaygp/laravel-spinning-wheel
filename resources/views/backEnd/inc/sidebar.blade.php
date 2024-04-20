@@ -45,7 +45,7 @@
                             <span>
                                 <i class="ti ti-users"></i>
                             </span>
-                            <span class="hide-menu">User List</span>
+                            <span class="hide-menu">Winner List</span>
                         </a>
                     </li>
 
@@ -60,30 +60,39 @@
                     <!-- =================== -->
                     <!-- Books -->
                     <!-- =================== -->
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ route('category.index') }}" aria-expanded="false">
-                            <span>
-                                <i class="ti ti-category-2"></i>
-                            </span>
-                            <span class="hide-menu">Category</span>
-                        </a>
-                    </li>
-                    {{--                    <li class="sidebar-item"> --}}
-                    {{--                        <a class="sidebar-link" href="{{route('recipe.list')}}" aria-expanded="false"> --}}
-                    {{--                  <span> --}}
-                    {{--                    <i class="ti ti-cookie"></i> --}}
-                    {{--                  </span> --}}
-                    {{--                            <span class="hide-menu">Recipe</span> --}}
-                    {{--                        </a> --}}
-                    {{--                    </li> --}}
-                    <!-- =================== -->
+{{--                    <li class="sidebar-item">--}}
+{{--                        <a class="sidebar-link" href="{{ route('category.index') }}" aria-expanded="false">--}}
+{{--                            <span>--}}
+{{--                                <i class="ti ti-category-2"></i>--}}
+{{--                            </span>--}}
+{{--                            <span class="hide-menu">Category</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                    --}}{{--                    <li class="sidebar-item"> --}}
+{{--                    --}}{{--                        <a class="sidebar-link" href="{{route('recipe.list')}}" aria-expanded="false"> --}}
+{{--                    --}}{{--                  <span> --}}
+{{--                    --}}{{--                    <i class="ti ti-cookie"></i> --}}
+{{--                    --}}{{--                  </span> --}}
+{{--                    --}}{{--                            <span class="hide-menu">Recipe</span> --}}
+{{--                    --}}{{--                        </a> --}}
+{{--                    --}}{{--                    </li> --}}
+{{--                    <!-- =================== -->--}}
+
+{{--                    <li class="sidebar-item">--}}
+{{--                        <a class="sidebar-link" href="{{ route('blog.list') }}">--}}
+{{--                            <span>--}}
+{{--                                <i class="ti ti-brand-blogger"></i>--}}
+{{--                            </span>--}}
+{{--                            <span class="hide-menu">Blog</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ route('blog.list') }}">
+                        <a class="sidebar-link" href="{{ route('skin.index') }}">
                             <span>
                                 <i class="ti ti-brand-blogger"></i>
                             </span>
-                            <span class="hide-menu">Blog</span>
+                            <span class="hide-menu">Case Category</span>
                         </a>
                     </li>
 
@@ -96,14 +105,7 @@
                         </a>
                     </li>
 
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ route('skin.index') }}">
-                            <span>
-                                <i class="ti ti-brand-blogger"></i>
-                            </span>
-                            <span class="hide-menu">Skin</span>
-                        </a>
-                    </li>
+
 
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="{{ route('user-point.index') }}">

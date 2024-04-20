@@ -10,9 +10,11 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-md-10">
                         <div class="section-header text-center">
-                            <h2 class="title">Recent Big <span>Winns</span></h2>
-                            <p>We update our site regularly; more and more winners are added every day! To locate the
-                                most recent winner's information</p>
+                            <h2 class="title"> Recent Big <span>Wins</span></h2>
+                            <p>
+                                We update our site regularly; more and more winners are added every day! To locate the
+                                most recent winner's information
+                            </p>
                         </div>
                     </div>
                 </div>

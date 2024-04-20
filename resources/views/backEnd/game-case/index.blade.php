@@ -52,7 +52,7 @@
                                             <th>Image</th>
                                             <th>Title</th>
                                             <th>win_chance</th>
-                                            <th>Description</th>
+                                            <th>Case Category</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -67,7 +67,7 @@
                                                 </td>
                                                 <td>{{ $row->title }}</td>
                                                 <td>{{ $row->win_chance }} %</td>
-                                                <td>$row->description</td>
+                                                <td>{{$row?->skin->title}}</td>
                                                 <td>
                                                     @if ($row->status == 1)
                                                         <span class="badge bg-secondary">Active</span>

@@ -65,6 +65,7 @@
                                 <label class="text-white">New Password</label>
                                 <input class="form-control" name="password" placeholder="New Password" type="password">
                             </div>
+
                             <div class="form-group">
                                 <label class="text-white">Confirm Password</label>
                                 <input class="form-control" name="password_confirmation" placeholder="Confirm Password" type="password">

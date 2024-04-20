@@ -1,5 +1,5 @@
 @extends('backEnd.master')
-@section('title', 'Update Skin')
+@section('title', 'Update Case Category')
 @section('content')
     <div class="container-fluid">
         <div class="card bg-light-info shadow-none position-relative overflow-hidden">
@@ -11,7 +11,7 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a class="text-muted "
                                         href="{{ route('admin.index') }}">Dashboard</a></li>
-                                <li class="breadcrumb-item" aria-current="page">Skin</li>
+                                <li class="breadcrumb-item" aria-current="page">Case Category</li>
                             </ol>
                         </nav>
                     </div>
@@ -34,7 +34,7 @@
                         </div>
                         <div class="col-md-8 text-end d-flex justify-content-md-end justify-content-center mt-3 mt-md-0">
                             <a href="{{ route('skin.index') }}" class="btn btn-info d-flex align-items-center">
-                                <i class="ti ti-list-details text-white me-1 fs-5"></i> Skin List
+                                <i class="ti ti-list-details text-white me-1 fs-5"></i> Case Category List
                             </a>
                         </div>
                     </div>

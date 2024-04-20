@@ -37,7 +37,7 @@ Route::get('/spinning-wheel/', [WebController::class, 'spinWheel'])->name('home.
 
 Route::get('/fetch-win-chances', [GameCaseController::class, 'fetchWinChances']);
 Route::post('/save-winning-id', [SpinWinController::class, 'saveWinningId']);
-
+Route::get('/case-category/{id}', [WebController::class, 'caseCategory'])->name('case.category');
 
 
 Route::get('/blog/{slug}', [WebController::class, 'blogDetails'])->name('home.blog');
@@ -53,9 +53,6 @@ Route::post('/contact/save', [HomeController::class, 'contactMessage'])->name('c
 
 Route::post('comment/save', [CommentController::class, 'store'])->name('comment.save');
 Route::get('/comments/delete/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
-
-
-
 
 Route::get('/dashboard', function () {
     return view('userPanel.admin.admin');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\GameCase;
 use App\Http\Requests\StoreGameCaseRequest;
 use App\Http\Requests\UpdateGameCaseRequest;
+use App\Models\Skin;
 use Illuminate\Http\Request;
 
 class GameCaseController extends Controller
@@ -14,8 +15,7 @@ class GameCaseController extends Controller
      */
     public function index()
     {
-        $gameCase = GameCase::latest()->get();
-
+        $gameCase = GameCase::with('skin')->latest()->get();
         return view('backEnd.game-case.index', compact('gameCase'));
     }
 
@@ -32,7 +32,8 @@ class GameCaseController extends Controller
      */
     public function create()
     {
-        return view('backEnd.game-case.create');
+        $skins = Skin::latest()->get();
+        return view('backEnd.game-case.create',compact('skins'));
     }
 
     /**
@@ -57,7 +58,8 @@ class GameCaseController extends Controller
      */
     public function edit(GameCase $gameCase)
     {
-        return view('backEnd.game-case.edit', compact('gameCase'));
+        $skins = Skin::latest()->get();
+        return view('backEnd.game-case.edit', compact('gameCase','skins'));
     }
 
     /**

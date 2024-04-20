@@ -11,6 +11,7 @@ use App\Models\Game;
 use App\Models\GameCase;
 use App\Models\Page;
 use App\Models\PointUse;
+use App\Models\Skin;
 use App\Models\SpinWin;
 use App\Models\UserPoint;
 use Illuminate\Database\Eloquent\Model;
@@ -21,9 +22,6 @@ use Illuminate\Http\Response; // Import the Response class
 
 class WebController extends Controller
 {
-
-    
-
     public function spin()
     {
         $spins = GameCase::whereStatus(1)->get();
@@ -35,7 +33,25 @@ class WebController extends Controller
         } else {
             $left_point = 0;
         }
-        return view('frontEnd.home.index', compact('spins', 'left_point'));
+
+        $cases = Skin::whereStatus(1)->latest()->get();
+
+        return view('frontEnd.home.index', compact('cases','spins', 'left_point'));
+    }
+
+    public function caseCategory($id){
+        $case = Skin::find($id);
+        $spins = GameCase::where('skin_id',$id)->get();
+        if (auth()->check()) {
+            $user = auth()->user()->id;
+            $points = UserPoint::where('user_id', $user)->sum('point');
+            $use_point = PointUse::where('user_id', $user)->sum('point');
+            $left_point = $points - $use_point;
+        } else {
+            $left_point = 0;
+        }
+
+        return view('frontEnd.wheel.category_wheel',compact('case','spins','left_point'));
     }
 
 
@@ -59,7 +75,7 @@ class WebController extends Controller
         } else {
             $left_point = 0;
         }
-        return view('frontEnd.wheel.wheel', compact('spins', 'left_point',));
+        return view('frontEnd.wheel.wheel', compact('spins', 'left_point'));
     }
 
 

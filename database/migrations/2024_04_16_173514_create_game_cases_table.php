@@ -18,6 +18,7 @@ return new class extends Migration
             $table->tinyInteger('status')->nullable();
             $table->longText('description')->nullable();
             $table->string('win_chance')->nullable();
+            $table->string('skin_id')->nullable();
             $table->timestamps();
         });
     }

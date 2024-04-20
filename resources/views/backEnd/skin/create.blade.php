@@ -1,5 +1,5 @@
 @extends('backEnd.master')
-@section('title', 'Create Game Case')
+@section('title', 'Create Case Category')
 @section('content')
     <div class="container-fluid">
         <div class="overflow-hidden shadow-none card bg-light-info position-relative">
@@ -11,7 +11,7 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a class="text-muted "
                                         href="{{ route('admin.index') }}">Dashboard</a></li>
-                                <li class="breadcrumb-item" aria-current="page">Skin</li>
+                                <li class="breadcrumb-item" aria-current="page">Case Category</li>
                             </ol>
                         </nav>
                     </div>
@@ -30,11 +30,11 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-4 ">
-                            <h2>Add Skin</h2>
+                            <h2>Add Case Category</h2>
                         </div>
                         <div class="mt-3 col-md-8 text-end d-flex justify-content-md-end justify-content-center mt-md-0">
                             <a href="{{ route('skin.index') }}" class="btn btn-info d-flex align-items-center">
-                                <i class="text-white ti ti-list-details me-1 fs-5"></i> Skin List
+                                <i class="text-white ti ti-list-details me-1 fs-5"></i> Case Category List
                             </a>
                         </div>
                     </div>

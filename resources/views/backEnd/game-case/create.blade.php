@@ -44,21 +44,22 @@
                         @csrf
 
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-8">
                                 <div class="mb-4">
                                     <label for="blog_title" class="form-label fw-semibold">Title</label>
                                     <input type="text" name="title" class="form-control" id="blog_title"
                                         placeholder="Game Case Title" required>
                                 </div>
                             </div>
-
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="mb-4">
-                                    <label for="" class="form-label fw-semibold">Status</label>
-                                    <select name="status" class="form-select">
-                                        <option value=""> select status</option>
-                                        <option value="1"> Active</option>
-                                        <option value="2"> Inactive</option>
+                                    <label for="" class="form-label fw-semibold">Case Category</label>
+                                    <select name="skin_id" class="form-select" required>
+                                        <option value=""> Case Category</option>
+                                        @foreach($skins as $row)
+                                            <option value="{{$row->id}}"> {{$row->title}}</option>
+                                        @endforeach
+
                                     </select>
                                 </div>
                             </div>
@@ -77,12 +78,24 @@
                                         required>
                                 </div>
                             </div>
-                            <div class="col-lg-12">
+                            <div class="col-lg-6">
                                 <div class="mb-4">
                                     <label for="Image" class="form-label fw-semibold">Win Chances</label>
-                                    <input type="number" name="win_chance" class="form-control" required>
+                                    <input type="number" name="win_chance" class="form-control" required step="any" placeholder="0.001">
                                 </div>
                             </div>
+
+                            <div class="col-lg-6">
+                                <div class="mb-4">
+                                    <label for="" class="form-label fw-semibold">Status</label>
+                                    <select name="status" class="form-select">
+                                        <option value=""> select status</option>
+                                        <option value="1"> Active</option>
+                                        <option value="2"> Inactive</option>
+                                    </select>
+                                </div>
+                            </div>
+
                             <div class="col-12">
                                 <div class="gap-3 d-flex align-items-center">
                                     <button class="btn btn-primary">Submit</button>
