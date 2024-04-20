@@ -85,7 +85,52 @@
 
 
 @include('frontEnd.inc.header')
-
+<div class="modal register fade" id="signInModalLong" tabindex="-1" role="dialog"
+     aria-labelledby="signInModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="signInModalLongTitle">
+                    <img src="{{asset($website->website_logo)}}" width="100px" alt="image">
+                </h5>
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                    <img src="{{asset('homePage')}}/images/cross-icon-1.png" alt="image">
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5> Welcome back</h5>
+                <div class="form-area">
+                    <form action="{{route('login')}}" method="post">
+                        @csrf
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input class="form-control" name="email"
+                                   placeholder="Registered Email Address." type="email">
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input class="form-control" name="password" placeholder="Password"
+                                   type="password">
+                        </div>
+                        <div class="form-group d-flex">
+                            <div class="checkbox_wrapper">
+                                <input type="checkbox" />
+                                <label></label>
+                            </div>
+                            <span class="check_span">I agree with <span>user
+                                                                agreement</span>, and confirm that I am at least 18
+                                                            years old!</span>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="cmn-btn cmn-btn-alt"> Login Now</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="mt-5"></div>
 
 @yield('content')
@@ -105,125 +150,6 @@
 <script src="{{asset('/')}}iziToast/dist/js/iziToast.min.js"></script>
 <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 
-
-<script>
-    $(document).ready(function () {
-        // Check if spin button should be hidden
-        var spinButtonHidden = localStorage.getItem('spinButtonHidden');
-        if (spinButtonHidden === 'true') {
-            $("#spin").hide();
-        }
-
-        var $carousel = $('.main-carousel').flickity({
-            // options
-            cellAlign: 'center',
-            contain: true,
-            draggable: false,
-            wrapAround: true,
-            prevNextButtons: false,
-            pageDots: false
-        });
-
-        var winning_id; // Define winning_id outside the click event handler
-
-        $("#spin").on("click", function () {
-            // Hide the spin button
-            $(this).hide();
-
-            var flkty = $('.main-carousel').data('flickity');
-            if (document.querySelector('.is-win')) {
-                document.querySelector('.is-win').classList.remove('is-win');
-                for (i in flkty.cells) {
-                    flkty.cells[i].element.classList.remove('opacity-25');
-                }
-            }
-
-            // Fetch the win chances from the backend
-            $.ajax({
-                url: '/fetch-win-chances',
-                type: 'GET',
-                success: function (response) {
-                    var winChances = response.winChances;
-
-                    // Calculate the total win chance
-                    var totalWinChance = winChances.reduce((total, current) => total + parseFloat(current.win_chance), 0);
-
-                    // Generate a random number between 0 and totalWinChance
-                    var randomNumber = Math.random() * totalWinChance;
-
-                    // Determine the winning index based on the win chances
-                    var cumulativeChance = 0;
-                    var winIndex = -1;
-                    for (var i = 0; i < winChances.length; i++) {
-                        cumulativeChance += parseFloat(winChances[i].win_chance);
-                        if (randomNumber < cumulativeChance) {
-                            winIndex = i;
-                            break;
-                        }
-                    }
-
-                    if (winIndex !== -1) {
-                        winning_id = winChances[winIndex].id;
-                       // console.log('Winning ID:', winning_id); // Log the winning ID
-
-                        // Save the winning ID to the database
-                        $.ajax({
-                            url: '/save-winning-id',
-                            type: 'POST',
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            data: { winning_id: winning_id }, // Pass winning_id here
-                            success: function (response) {
-                              //  console.log('Winning ID saved successfully!');
-                                // You can perform any additional actions after saving the winning ID here
-                            },
-                            error: function (error) {
-                                console.error('Error saving winning ID:', error);
-                            }
-                        });
-
-                        var time = 6000;
-                        var intervalTime = time / (time / 80);
-                        var loop = 0;
-                        var totalLoop = time / 80;
-                        var spin = setInterval(() => {
-                            if (loop < totalLoop) {
-                                $carousel.flickity('next');
-                                loop++;
-                            } else if (flkty.selectedIndex !== winning_id - 1) { // Use winning_id here
-                                $carousel.flickity('next');
-                            } else {
-                                flkty.selectedElements[0].classList.add('is-win');
-                                for (i in flkty.cells) {
-                                    flkty.cells[i].element.classList.add('opacity-25');
-                                }
-                                clearInterval(spin);
-
-                                // Mark the spin button as not hidden in localStorage
-                                localStorage.setItem('spinButtonHidden', 'false');
-                            }
-                        }, intervalTime);
-
-                        // Trigger spinning animation after 6 seconds
-                        setTimeout(function () {
-                            // Check if the spin button is hidden
-                            if ($("#spin").is(":hidden")) {
-                                // Reset the carousel to the first item
-                                $carousel.flickity('select', 0);
-                                // Show the spin button
-                                $("#spin").hide();
-                            }
-                        }, 6000);
-                    }
-                },
-                error: function (error) {
-                    console.error('Error fetching win chances:', error);
-                }
-            });
-        });
-    });
-</script>
 
 @if($errors->any())
     @foreach($errors->all() as $error)
@@ -248,6 +174,9 @@
 
     </script>
 @endif
+
+@yield('script')
+
 </body>
 
 </html>

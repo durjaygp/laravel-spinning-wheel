@@ -1002,8 +1002,8 @@ input[type="checkbox"]:checked + label{
 #banner-section {
     position: relative;
     padding-top: 167px;
-    background-color: #280B70;
-    background-image: url(../images/banner-bg.png);
+    /* background-color: #280B70;
+    background-image: url(../images/banner-bg.png); */
     background-size: 100%;
     background-repeat: no-repeat;
     margin-bottom: 69px;

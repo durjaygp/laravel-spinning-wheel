@@ -24,9 +24,9 @@
             <div class="bottom-area pt-120">
                 <div class="row d-flex header-area">
                     <div class="col-lg-8 col-md-8 d-flex justify-content-md-between justify-content-center align-items-center">
-                        <div class="logo-section">
-                            <a class="site-logo site-title" href="index.html"><img src="{{asset($website->website_logo)}}" alt="site-logo"></a>
-                        </div>
+{{--                        <div class="logo-section">--}}
+{{--                            <a class="site-logo site-title" href="index.html"><img src="{{asset($website->website_logo)}}" alt="site-logo"></a>--}}
+{{--                        </div>--}}
                         <ul class="navbar-nav main-menu d-flex align-items-center">
                             <li><a href="index.html" class="active">Home</a></li>
                             <li class=""><a href="#">Spinning Wheel</a></li>
@@ -52,7 +52,8 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <div class="text-center">
-                            <p>{{ $website->footer }}
+                            <p>
+{{--                                {{ $website->footer }}--}}
                             </p>
                         </div>
                     </div>

@@ -14,15 +14,15 @@
                 <nav class="navbar navbar-expand-lg p-0">
                     <div class="navbar-collapse collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav main-menu ml-auto">
-                            <li><a href="{{route('home')}}" class="active">Home</a>
-                            </li>
-                            <li class=""><a href="#">Spinning Wheel</a></li>
-                            <li class=""><a href="#">Skins</a></li>
-                            <li class=""><a href="#">Contact Me</a></li>
+                            <li><a href="{{route('home')}}#banner-section" class="active">Home</a></li>
+                            <li class=""><a href="{{route('home.spin')}}">Spinning Wheel</a></li>
+                            <li class=""><a href="{{route('home')}}#available-game-section">Skins</a></li>
+                            <li class=""><a href="{{route('home')}}#footer-section">Contact Me</a></li>
                             @auth
                                 <li class="menu_has_children"><a href="#0">{{ auth()->user()->name }}</a>
                                     <ul class="sub-menu">
                                         <li><a href="{{route('home.win')}}">My Profile</a></li>
+                                        <li><a href="{{route('profile.update.setting')}}">Profile Setting</a></li>
                                         <li><a href="#" onclick="event.preventDefault();
                                            document.getElementById('logout-form').submit();" >Logout</a></li>
                                         <form method="POST" action="{{ route('logout') }}" class="d-none" id="logout-form">
@@ -32,7 +32,8 @@
                                     </ul>
                                 </li>
                             @else
-                                <li class=""><a href="#">Login</a></li>
+                                <li class=""  data-toggle="modal"
+                                    data-target="#signInModalLong"><a href="#">Login</a></li>
                             @endauth
 
                         </ul>

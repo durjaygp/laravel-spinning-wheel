@@ -7,8 +7,6 @@ use App\Http\Controllers\SkinController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GameCaseController;
-use App\Http\Controllers\Web\BookController;
-use App\Http\Controllers\Web\CartController;
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\UserPanelController;
 use App\Http\Controllers\UserPointController;
@@ -29,8 +27,12 @@ use App\Http\Controllers\Admin\AdminRecipeController;
 use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\SpinWinController;
 
+
+
+
 // =============== Home Routes ===============
 Route::get('/', [WebController::class, 'spin'])->name('home');
+Route::get('/spinning-wheel/', [WebController::class, 'spinWheel'])->name('home.spin');
 
 
 Route::get('/fetch-win-chances', [GameCaseController::class, 'fetchWinChances']);
@@ -69,9 +71,10 @@ Route::middleware('auth')->group(function () {
     Route::get('dashboard/blog/delete/{id}', [UserPanelController::class, 'delete'])->name('userBlog.delete');
     Route::get('dashboard/blog/edit/{id}', [UserPanelController::class, 'edit'])->name('userBlog.edit');
     Route::post('dashboard/blog/update', [UserPanelController::class, 'update'])->name('userBlog.update');
-
+    Route::get('/profile/setting/update', [UserPanelController::class, 'profileSetting'])->name('profile.update.setting');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });

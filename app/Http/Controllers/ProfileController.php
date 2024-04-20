@@ -47,7 +47,7 @@ class ProfileController extends Controller
 
             $user->save();
 
-            return redirect()->route('profile.edit')->with('status', 'profile-updated');
+            return redirect()->back()->with('status', 'Profile Updated');
         } catch (\Exception $e) {
             // Log the error
             \Log::error('Profile update error: ' . $e->getMessage());
@@ -57,18 +57,28 @@ class ProfileController extends Controller
         }
     }
 
+//    public function saveImage($request)
+//    {
+//        $image = $request->file('image');
+//        $imageName = rand() . '.' . $image->getClientOriginalExtension();
+//        $directory = 'uploads/';
+//        $imageUrl = $directory . $imageName;
+//
+//        $image->move($directory, $imageName);
+//
+//        return $imageUrl;
+//    }
+
+    public $image, $imageName, $imageUrl, $directory;
     public function saveImage($request)
     {
-        $image = $request->file('image');
-        $imageName = rand() . '.' . $image->getClientOriginalExtension();
-        $directory = 'uploads/';
-        $imageUrl = $directory . $imageName;
-
-        $image->move($directory, $imageName);
-
-        return $imageUrl;
+        $this->image = $request->file('image');
+        $this->imageName = rand().'.'.$this->image->getClientOriginalExtension();
+        $this->directory = 'uploads/';
+        $this->imageUrl = $this->directory . $this->imageName;
+        $this->image->move($this->directory, $this->imageName);
+        return $this->imageUrl;
     }
-
 
     public function deleteExistingImage($imagePath)
     {

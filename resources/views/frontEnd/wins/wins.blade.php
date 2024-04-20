@@ -16,18 +16,20 @@
                         </div>
                     </div>
                 </div>
+                @php
+                    $point = \App\Models\UserPoint::where('user_id', auth()->user()->id)->sum('point');
+                    $used = \App\Models\PointUse::where('user_id',auth()->user()->id)->sum('point');
+                    $mypoint = $point - $used
+                @endphp
+
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-4">
                         <div class="left-side text-center">
+                            <h5> Point: {{$mypoint}}</h5>
                             <h5 class="head">{{auth()->user()->name}}</h5>
+                            <h5 class="head">{{auth()->user()->username}}</h5>
                             <div class="profile">
-                                <img src="{{asset('homePage')}}/images/user-4.png" alt="image">
-                                @php
-                                    $point = \App\Models\UserPoint::where('user_id', auth()->user()->id)->sum('point');
-                                    $used = \App\Models\PointUse::where('user_id',auth()->user()->id)->sum('point');
-                                    $mypoint = $point - $used
-                                @endphp
-                                <h5> Point: {{$mypoint}}</h5>
+                                <img src="{{asset(auth()->user()->image)}}"  class="img-fluid w-50" alt="image">
                             </div>
                         </div>
                     </div>
@@ -40,7 +42,6 @@
                             </div>
                             <div class="winner-chart">
                                 @foreach($wins_skins as $row)
-
                                     <div class="single-item d-flex justify-content-between align-items-center">
                                         <div class="left-area d-flex align-items-center">
                                             <span> {{$loop->iteration}}</span>

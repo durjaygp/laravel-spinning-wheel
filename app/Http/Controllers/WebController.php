@@ -21,24 +21,8 @@ use Illuminate\Http\Response; // Import the Response class
 
 class WebController extends Controller
 {
-//    public function index(){
-//        $slider = Blog::latest()->whereStatus(1)->wherePosition(0)->limit(4)->get();
-//        $blogs = Blog::whereStatus(1)->latest()->limit(9)->wherePosition(1)->get();
-//
-//        return view('frontEnd.home.index',compact('slider','blogs'));
-//    }
 
-//
-//    public function index()
-//    {
-//        $slider = Blog::latest()->whereStatus(1)->wherePosition(0)->limit(4)->get();
-//        $blogs = Blog::whereStatus(1)->latest()->wherePosition(1)->get();
-//
-//        $featuredBlog = $blogs->splice(0, 1)->first(); // Extract the first post
-//        $remainingBlogs = $blogs->take(8); // Take the next 8 posts for grid view
-//
-//        return view('frontEnd.home.index', compact('slider', 'featuredBlog', 'remainingBlogs'));
-//    }
+    
 
     public function spin()
     {
@@ -62,6 +46,20 @@ class WebController extends Controller
         $wins_skins = SpinWin::latest()->where('user_id', $profile)->get();
 
         return view('frontEnd.wins.wins', compact('wins_skins'));
+    }
+
+    public function spinWheel()
+    {
+        $spins = GameCase::whereStatus(1)->get();
+        if (auth()->check()) {
+            $user = auth()->user()->id;
+            $points = UserPoint::where('user_id', $user)->sum('point');
+            $use_point = PointUse::where('user_id', $user)->sum('point');
+            $left_point = $points - $use_point;
+        } else {
+            $left_point = 0;
+        }
+        return view('frontEnd.wheel.wheel', compact('spins', 'left_point',));
     }
 
 

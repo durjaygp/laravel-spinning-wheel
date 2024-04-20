@@ -18,6 +18,10 @@ class UserPanelController extends Controller
         return view('userPanel.admin.admin');
     }
 
+    public function profileSetting(){
+        return view('frontEnd.profile.index');
+    }
+
     public function indexBlog(){
         $blogs = Blog::latest()->where('user_id',auth()->user()->id)->get();
         return view('userPanel.blog.index',compact('blogs'));
