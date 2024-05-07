@@ -85,52 +85,52 @@
 
 
 @include('frontEnd.inc.header')
-<div class="modal register fade" id="signInModalLong" tabindex="-1" role="dialog"
-     aria-labelledby="signInModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="signInModalLongTitle">
-                    <img src="{{asset($website->website_logo)}}" width="100px" alt="image">
-                </h5>
-                <button type="button" class="close" data-dismiss="modal"
-                        aria-label="Close">
-                    <img src="{{asset('homePage')}}/images/cross-icon-1.png" alt="image">
-                </button>
-            </div>
-            <div class="modal-body">
-                <h5> Welcome back</h5>
-                <div class="form-area">
-                    <form action="{{route('login')}}" method="post">
-                        @csrf
-                        <div class="form-group">
-                            <label>Email Address</label>
-                            <input class="form-control" name="email"
-                                   placeholder="Registered Email Address." type="email">
-                        </div>
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input class="form-control" name="password" placeholder="Password"
-                                   type="password">
-                        </div>
-                        <div class="form-group d-flex">
-                            <div class="checkbox_wrapper">
-                                <input type="checkbox" />
-                                <label></label>
-                            </div>
-                            <span class="check_span">I agree with <span>user
-                                                                agreement</span>, and confirm that I am at least 18
-                                                            years old!</span>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="cmn-btn cmn-btn-alt"> Login Now</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+{{--<div class="modal register fade" id="signInModalLong" tabindex="-1" role="dialog"--}}
+{{--     aria-labelledby="signInModalLongTitle" aria-hidden="true">--}}
+{{--    <div class="modal-dialog" role="document">--}}
+{{--        <div class="modal-content">--}}
+{{--            <div class="modal-header">--}}
+{{--                <h5 class="modal-title" id="signInModalLongTitle">--}}
+{{--                    <img src="{{asset($website->website_logo)}}" width="100px" alt="image">--}}
+{{--                </h5>--}}
+{{--                <button type="button" class="close" data-dismiss="modal"--}}
+{{--                        aria-label="Close">--}}
+{{--                    <img src="{{asset('homePage')}}/images/cross-icon-1.png" alt="image">--}}
+{{--                </button>--}}
+{{--            </div>--}}
+{{--            <div class="modal-body">--}}
+{{--                <h5> Welcome back</h5>--}}
+{{--                <div class="form-area">--}}
+{{--                    <form action="{{route('login')}}" method="post">--}}
+{{--                        @csrf--}}
+{{--                        <div class="form-group">--}}
+{{--                            <label>Email Address</label>--}}
+{{--                            <input class="form-control" name="email"--}}
+{{--                                   placeholder="Registered Email Address." type="email">--}}
+{{--                        </div>--}}
+{{--                        <div class="form-group">--}}
+{{--                            <label>Password</label>--}}
+{{--                            <input class="form-control" name="password" placeholder="Password"--}}
+{{--                                   type="password">--}}
+{{--                        </div>--}}
+{{--                        <div class="form-group d-flex">--}}
+{{--                            <div class="checkbox_wrapper">--}}
+{{--                                <input type="checkbox" />--}}
+{{--                                <label></label>--}}
+{{--                            </div>--}}
+{{--                            <span class="check_span">I agree with <span>user--}}
+{{--                                                                agreement</span>, and confirm that I am at least 18--}}
+{{--                                                            years old!</span>--}}
+{{--                        </div>--}}
+{{--                        <div class="form-group">--}}
+{{--                            <button type="submit" class="cmn-btn cmn-btn-alt"> Login Now</button>--}}
+{{--                        </div>--}}
+{{--                    </form>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</div>--}}
 <div class="mt-5"></div>
 
 @yield('content')

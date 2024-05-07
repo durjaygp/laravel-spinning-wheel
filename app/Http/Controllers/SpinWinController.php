@@ -10,18 +10,28 @@ class SpinWinController extends Controller
 {
     public function saveWinningId(Request $request)
     {
-        $winningId = $request->input('winning_id');
-        $spinWin = new SpinWin();
-        $spinWin->winning_id = $winningId;
-        $spinWin->user_id = auth()->user()->id;
-        $spinWin->save();
+        try {
+            // Retrieve winning ID from the request input
+            $winningId = $request->input('winning_id');
 
-        $point = new PointUse();
-        $point->user_id = auth()->user()->id;
-        $point->point = 1;
-        $point->save();
-        // You can return a response if needed
-        return response()->json(['message' => 'Winning ID saved successfully']);
+            // Create a new SpinWin instance
+            $spinWin = new SpinWin();
+            $spinWin->winning_id = $winningId;
+            $spinWin->user_id = auth()->user()->id;
+            $spinWin->save();
+
+            // Create a new PointUse instance
+            $point = new PointUse();
+            $point->user_id = auth()->user()->id;
+            $point->point = 1;
+            $point->save();
+
+            // Return a success response
+            return response()->json(['message' => 'Winning ID saved successfully']);
+        } catch (\Exception $e) {
+            // Return an error response if an exception occurs
+            return response()->json(['error' => 'Failed to save winning ID'], 500);
+        }
     }
 
 

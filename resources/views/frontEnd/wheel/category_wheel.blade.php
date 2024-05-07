@@ -36,11 +36,21 @@
                         <path
                             d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
                     </svg>
+{{--                    <div class="main-carousel">--}}
+{{--                        @foreach($spins as $row)--}}
+{{--                            <div class="carousel-cell">--}}
+{{--                                <img src="{{asset($row->image)}}" alt="image">--}}
+{{--                                <h4>{{$row->title}}</h4>--}}
+{{--                            </div>--}}
+{{--                        @endforeach--}}
+{{--                    </div>--}}
+
                     <div class="main-carousel">
                         @foreach($spins as $row)
                             <div class="carousel-cell" id="item-{{$row->id}}">
                                 <img src="{{asset($row->image)}}" alt="image">
                                 <h4>{{$row->title}}</h4>
+                                <input type="hidden" value="{{$row->win_chance}}" id="win_chance">
                             </div>
                         @endforeach
                     </div>
@@ -173,9 +183,285 @@
     </section>
     <!-- Feature Game In end -->
 
+    <!-- Available Game In start -->
+    <section id="available-game-section" class="index-2 games-2 home-2" style="margin-bottom: 20px;">
+        <div class="overlay pb-120">
+            <div class="container wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                <div class="container">
+                    <div class="row justify-content-between">
+                        <div class="col-lg-6 col-md-9 col-sm-8">
+                            <div class="section-header">
+                                <h2 class="title">Latest Skins</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content" id="myTabContentt">
+                    <div class="tab-pane fade show active" id="latest" role="tabpanel" aria-labelledby="latest-tab">
+                        <div class="row contained-area mb-30-none">
+                            @foreach($skinss as $row)
+                                <div class="col-lg-4">
+                                    <div class="text-center">
+                                        <a href="#"><img src="{{asset($row->image)}}" alt="image"></a>
+                                        <p>{{$row->title}}</p>
+                                        <p>{{$row->win_chance}}%</p>
+                                    </div>
+
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Available Game In end -->
+
 @endsection
 
 @section('script')
+{{--    <script>--}}
+{{--        $(document).ready(function () {--}}
+{{--            // Check if spin button should be hidden--}}
+{{--            var spinButtonHidden = localStorage.getItem('spinButtonHidden');--}}
+{{--            if (spinButtonHidden === 'true') {--}}
+{{--                $("#spin").hide();--}}
+{{--            }--}}
+
+{{--            var $carousel = $('.main-carousel').flickity({--}}
+{{--                cellAlign: 'center',--}}
+{{--                contain: true,--}}
+{{--                draggable: false,--}}
+{{--                wrapAround: true,--}}
+{{--                prevNextButtons: false,--}}
+{{--                pageDots: false--}}
+{{--            });--}}
+
+{{--            var winning_id; // Define winning_id outside the click event handler--}}
+{{--            var spin; // Define spin variable globally--}}
+
+{{--            $("#spin").on("click", function () {--}}
+{{--                // Hide the spin button--}}
+{{--                $(this).hide();--}}
+
+{{--                var flkty = $carousel.data('flickity');--}}
+{{--                if ($('.is-win').length > 0) {--}}
+{{--                    $('.is-win').removeClass('is-win');--}}
+{{--                    $('.carousel-cell').removeClass('opacity-25');--}}
+{{--                }--}}
+
+{{--                // Fetch the win chances from the backend--}}
+{{--                $.ajax({--}}
+{{--                    url: '/fetch-win-chances',--}}
+{{--                    type: 'GET',--}}
+{{--                    success: function (response) {--}}
+{{--                        var winChances = response.winChances;--}}
+
+{{--                        // Calculate the total win chance--}}
+{{--                        var totalWinChance = winChances.reduce((total, current) => total + parseFloat(current.win_chance), 0);--}}
+
+{{--                        // Generate a random number between 0 and totalWinChance--}}
+{{--                        var randomNumber = Math.random() * totalWinChance;--}}
+
+{{--                        // Determine the winning index based on the win chances--}}
+{{--                        var cumulativeChance = 0;--}}
+{{--                        var winIndex = -1;--}}
+{{--                        for (var i = 0; i < winChances.length; i++) {--}}
+{{--                            cumulativeChance += parseFloat(winChances[i].win_chance);--}}
+{{--                            if (randomNumber < cumulativeChance) {--}}
+{{--                                winIndex = i;--}}
+{{--                                break;--}}
+{{--                            }--}}
+{{--                        }--}}
+
+{{--                        if (winIndex !== -1) {--}}
+{{--                            winning_id = winChances[winIndex].id;--}}
+{{--                            console.log('Winning ID:', winning_id); // Log the winning ID--}}
+
+{{--                            // Save the winning ID to the database--}}
+{{--                            $.ajax({--}}
+{{--                                url: '/save-winning-id',--}}
+{{--                                type: 'POST',--}}
+{{--                                headers: {--}}
+{{--                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
+{{--                                },--}}
+{{--                                data: { winning_id: winning_id }, // Pass winning_id here--}}
+{{--                                success: function (response) {--}}
+{{--                                    console.log('Winning ID saved successfully!');--}}
+{{--                                    // Start the spinning animation here--}}
+{{--                                    startSpinAnimation();--}}
+{{--                                },--}}
+{{--                                error: function (error) {--}}
+{{--                                    console.error('Error saving winning ID:', error);--}}
+{{--                                }--}}
+{{--                            });--}}
+{{--                        }--}}
+{{--                    },--}}
+{{--                    error: function (error) {--}}
+{{--                        console.error('Error fetching win chances:', error);--}}
+{{--                    }--}}
+{{--                });--}}
+{{--            });--}}
+
+{{--            // Function to start the spinning animation--}}
+{{--            function startSpinAnimation() {--}}
+{{--                var flkty = $carousel.data('flickity');--}}
+{{--                var time = 6000;--}}
+{{--                var intervalTime = time / (time / 80);--}}
+{{--                var loop = 0;--}}
+{{--                var totalLoop = time / 80;--}}
+{{--                spin = setInterval(() => {--}}
+{{--                    if (loop < totalLoop) {--}}
+{{--                        $carousel.flickity('next');--}}
+{{--                        loop++;--}}
+{{--                    } else {--}}
+{{--                        clearInterval(spin);--}}
+{{--                        stopSpinAnimation();--}}
+{{--                    }--}}
+{{--                }, intervalTime);--}}
+{{--            }--}}
+
+{{--            function stopSpinAnimation() {--}}
+{{--                var flkty = $carousel.data('flickity');--}}
+{{--                var winningCellIndex = winning_id - 1; // Adjust index since IDs are not used--}}
+{{--                var winningCell = $('.carousel-cell').get(winningCellIndex);--}}
+{{--                flkty.selectCell(winningCell);--}}
+{{--                flkty.selectedElements[0].classList.add('is-win');--}}
+{{--                $('.carousel-cell').not(winningCell).addClass('opacity-25');--}}
+
+{{--                // Mark the spin button as not hidden in localStorage--}}
+{{--                localStorage.setItem('spinButtonHidden', 'false');--}}
+
+{{--                // Show the spin button--}}
+{{--                $("#spin").show();--}}
+{{--            }--}}
+{{--        });--}}
+{{--    </script>--}}
+
+{{--<script>--}}
+{{--    $(document).ready(function () {--}}
+{{--        // Check if spin button should be hidden--}}
+{{--        var spinButtonHidden = localStorage.getItem('spinButtonHidden');--}}
+{{--        if (spinButtonHidden === 'true') {--}}
+{{--            $("#spin").hide();--}}
+{{--        }--}}
+
+{{--        var $carousel = $('.main-carousel').flickity({--}}
+{{--            cellAlign: 'center',--}}
+{{--            contain: true,--}}
+{{--            draggable: false,--}}
+{{--            wrapAround: true,--}}
+{{--            prevNextButtons: false,--}}
+{{--            pageDots: false--}}
+{{--        });--}}
+
+{{--        var winning_chance; // Define winning_chance outside the click event handler--}}
+{{--        var spin; // Define spin variable globally--}}
+
+{{--        $("#spin").on("click", function () {--}}
+{{--            // Hide the spin button--}}
+{{--            $(this).hide();--}}
+
+{{--            var flkty = $carousel.data('flickity');--}}
+{{--            if ($('.is-win').length > 0) {--}}
+{{--                $('.is-win').removeClass('is-win');--}}
+{{--                $('.carousel-cell').removeClass('opacity-25');--}}
+{{--            }--}}
+
+{{--            // Fetch the win chances from the backend--}}
+{{--            $.ajax({--}}
+{{--                url: '/fetch-win-chances',--}}
+{{--                type: 'GET',--}}
+{{--                success: function (response) {--}}
+{{--                    var winChances = response.winChances;--}}
+
+{{--                    // Calculate the total win chance--}}
+{{--                    var totalWinChance = winChances.reduce((total, current) => total + parseFloat(current.win_chance), 0);--}}
+
+{{--                    // Generate a random number between 0 and totalWinChance--}}
+{{--                    var randomNumber = Math.random() * totalWinChance;--}}
+
+{{--                    // Determine the winning chance based on the win chances--}}
+{{--                    var cumulativeChance = 0;--}}
+{{--                    for (var i = 0; i < winChances.length; i++) {--}}
+{{--                        cumulativeChance += parseFloat(winChances[i].win_chance);--}}
+{{--                        if (randomNumber < cumulativeChance) {--}}
+{{--                            winning_chance = winChances[i].win_chance;--}}
+{{--                            break;--}}
+{{--                        }--}}
+{{--                    }--}}
+
+{{--                    // Find the winning cell based on winning_chance--}}
+{{--                    var $winningCell = $('.carousel-cell').filter(function() {--}}
+{{--                        return $(this).find('#win_chance').val() === winning_chance;--}}
+{{--                    });--}}
+
+{{--                    if ($winningCell.length > 0) {--}}
+{{--                        // Get the index of the winning cell--}}
+{{--                        var winningIndex = $carousel.find('.carousel-cell').index($winningCell);--}}
+
+{{--                        // Save the winning ID to the database--}}
+{{--                        $.ajax({--}}
+{{--                            url: '/save-winning-id',--}}
+{{--                            type: 'POST',--}}
+{{--                            headers: {--}}
+{{--                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
+{{--                            },--}}
+{{--                            data: { winning_id: winningIndex + 1 }, // Pass winning index--}}
+{{--                            success: function (response) {--}}
+{{--                                console.log('Winning ID saved successfully!');--}}
+{{--                                // Start the spinning animation here--}}
+{{--                                startSpinAnimation();--}}
+{{--                            },--}}
+{{--                            error: function (error) {--}}
+{{--                                console.error('Error saving winning ID:', error);--}}
+{{--                            }--}}
+{{--                        });--}}
+{{--                    }--}}
+{{--                },--}}
+{{--                error: function (error) {--}}
+{{--                    console.error('Error fetching win chances:', error);--}}
+{{--                }--}}
+{{--            });--}}
+{{--        });--}}
+
+{{--        // Function to start the spinning animation--}}
+{{--        function startSpinAnimation() {--}}
+{{--            var flkty = $carousel.data('flickity');--}}
+{{--            var time = 6000;--}}
+{{--            var intervalTime = time / (time / 80);--}}
+{{--            var loop = 0;--}}
+{{--            var totalLoop = time / 80;--}}
+{{--            spin = setInterval(() => {--}}
+{{--                if (loop < totalLoop) {--}}
+{{--                    $carousel.flickity('next');--}}
+{{--                    loop++;--}}
+{{--                } else {--}}
+{{--                    clearInterval(spin);--}}
+{{--                    stopSpinAnimation();--}}
+{{--                }--}}
+{{--            }, intervalTime);--}}
+{{--        }--}}
+
+{{--        // Function to stop the spinning animation--}}
+{{--        function stopSpinAnimation() {--}}
+{{--            var flkty = $carousel.data('flickity');--}}
+{{--            var $winningCell = $('.carousel-cell').filter(function() {--}}
+{{--                return $(this).find('#win_chance').val() === winning_chance;--}}
+{{--            });--}}
+{{--            flkty.selectCell($winningCell);--}}
+{{--            flkty.selectedElements[0].classList.add('is-win');--}}
+{{--            $('.carousel-cell').not($winningCell).addClass('opacity-25');--}}
+
+{{--            // Mark the spin button as not hidden in localStorage--}}
+{{--            localStorage.setItem('spinButtonHidden', 'false');--}}
+
+{{--            // Show the spin button--}}
+{{--            $("#spin").show();--}}
+{{--        }--}}
+{{--    });--}}
+{{--</script>--}}
+
 
     <script>
         $(document).ready(function () {
@@ -186,7 +472,6 @@
             }
 
             var $carousel = $('.main-carousel').flickity({
-                // options
                 cellAlign: 'center',
                 contain: true,
                 draggable: false,
@@ -196,22 +481,21 @@
             });
 
             var winning_id; // Define winning_id outside the click event handler
+            var spin; // Define spin variable globally
 
             $("#spin").on("click", function () {
                 // Hide the spin button
                 $(this).hide();
 
-                var flkty = $('.main-carousel').data('flickity');
-                if (document.querySelector('.is-win')) {
-                    document.querySelector('.is-win').classList.remove('is-win');
-                    for (i in flkty.cells) {
-                        flkty.cells[i].element.classList.remove('opacity-25');
-                    }
+                var flkty = $carousel.data('flickity');
+                if ($('.is-win').length > 0) {
+                    $('.is-win').removeClass('is-win');
+                    $('.carousel-cell').removeClass('opacity-25');
                 }
 
                 // Fetch the win chances from the backend
                 $.ajax({
-                    url: '/fetch-win-chances',
+                    url: '/fetch-win-chances/{{$case->id}}',
                     type: 'GET',
                     success: function (response) {
                         var winChances = response.winChances;
@@ -235,7 +519,7 @@
 
                         if (winIndex !== -1) {
                             winning_id = winChances[winIndex].id;
-                             console.log('Winning ID:', winning_id); // Log the winning ID
+                            console.log('Winning ID:', winning_id); // Log the winning ID
 
                             // Save the winning ID to the database
                             $.ajax({
@@ -246,46 +530,14 @@
                                 },
                                 data: { winning_id: winning_id }, // Pass winning_id here
                                 success: function (response) {
-                                      console.log('Winning ID saved successfully!');
-                                    // You can perform any additional actions after saving the winning ID here
+                                    console.log('Winning ID saved successfully!');
+                                    // Start the spinning animation here
+                                    startSpinAnimation();
                                 },
                                 error: function (error) {
                                     console.error('Error saving winning ID:', error);
                                 }
                             });
-
-                            var time = 6000;
-                            var intervalTime = time / (time / 80);
-                            var loop = 0;
-                            var totalLoop = time / 80;
-                            var spin = setInterval(() => {
-                                if (loop < totalLoop) {
-                                    $carousel.flickity('next');
-                                    loop++;
-                                } else if (flkty.selectedIndex !== winning_id - 1) { // Use winning_id here
-                                    $carousel.flickity('next');
-                                } else {
-                                    flkty.selectedElements[0].classList.add('is-win');
-                                    for (i in flkty.cells) {
-                                        flkty.cells[i].element.classList.add('opacity-25');
-                                    }
-                                    clearInterval(spin);
-
-                                    // Mark the spin button as not hidden in localStorage
-                                    localStorage.setItem('spinButtonHidden', 'false');
-                                }
-                            }, intervalTime);
-
-                            // Trigger spinning animation after 6 seconds
-                            setTimeout(function () {
-                                // Check if the spin button is hidden
-                                if ($("#spin").is(":hidden")) {
-                                    // Reset the carousel to the first item
-                                    $carousel.flickity('select', 0);
-                                    // Show the spin button
-                                    $("#spin").hide();
-                                }
-                            }, 6000);
                         }
                     },
                     error: function (error) {
@@ -293,8 +545,42 @@
                     }
                 });
             });
+
+            // Function to start the spinning animation
+            function startSpinAnimation() {
+                var flkty = $carousel.data('flickity');
+                var time = 6000;
+                var intervalTime = time / (time / 80);
+                var loop = 0;
+                var totalLoop = time / 80;
+                spin = setInterval(() => {
+                    if (loop < totalLoop) {
+                        $carousel.flickity('next');
+                        loop++;
+                    } else {
+                        clearInterval(spin);
+                        stopSpinAnimation();
+                    }
+                }, intervalTime);
+            }
+
+            // Function to stop the spinning animation
+            function stopSpinAnimation() {
+                var flkty = $carousel.data('flickity');
+                flkty.selectCell('.carousel-cell#item-' + winning_id);
+                flkty.selectedElements[0].classList.add('is-win');
+                $('.carousel-cell').not('#item-' + winning_id).addClass('opacity-25');
+
+                // Mark the spin button as not hidden in localStorage
+                localStorage.setItem('spinButtonHidden', 'false');
+
+                // Show the spin button
+                $("#spin").show();
+            }
         });
     </script>
+
+
 @endsection
 
 

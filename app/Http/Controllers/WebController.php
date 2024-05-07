@@ -39,19 +39,36 @@ class WebController extends Controller
         return view('frontEnd.home.index', compact('cases','spins', 'left_point'));
     }
 
-    public function caseCategory($id){
-        $case = Skin::find($id);
-        $spins = GameCase::where('skin_id',$id)->get();
-        if (auth()->check()) {
-            $user = auth()->user()->id;
-            $points = UserPoint::where('user_id', $user)->sum('point');
-            $use_point = PointUse::where('user_id', $user)->sum('point');
-            $left_point = $points - $use_point;
-        } else {
-            $left_point = 0;
-        }
+    public function caseCategory($id)
+    {
+        try {
+            // Retrieve spins related to the specified game case skin ID
+            $spins = GameCase::where('skin_id', $id)->get();
 
-        return view('frontEnd.wheel.category_wheel',compact('case','spins','left_point'));
+            // Calculate left points if the user is authenticated
+            if (auth()->check()) {
+                $user = auth()->user()->id;
+                $points = UserPoint::where('user_id', $user)->sum('point');
+                $use_point = PointUse::where('user_id', $user)->sum('point');
+                $left_point = $points - $use_point;
+            } else {
+                // If the user is not authenticated, set left_point to 0
+                $left_point = 0;
+            }
+
+            // Retrieve details of the skin with the provided ID
+            $case = Skin::findOrFail($id);
+
+            // Retrieve all game cases related to the provided skin ID
+            $skinss = GameCase::where('skin_id', $id)->get();
+
+            // Return the view with the retrieved data
+            return view('frontEnd.wheel.category_wheel', compact('skinss', 'case', 'spins', 'left_point'));
+        } catch (\Exception $e) {
+            // Handle any exceptions (e.g., if the skin ID is not found)
+            // You can customize the error response or log the error as needed
+            return response()->json(['error' => 'Failed to load category data'], 500);
+        }
     }
 
 

@@ -19,9 +19,9 @@ class GameCaseController extends Controller
         return view('backEnd.game-case.index', compact('gameCase'));
     }
 
-    public function fetchWinChances(Request $request)
+    public function fetchWinChances(Request $request,$cate_id)
     {
-        $winChances = GameCase::select('id', 'win_chance')->where('status', 1)->get();
+        $winChances = GameCase::select('id', 'win_chance')->where('skin_id',$cate_id)->get();
         // Fetch only active game cases and select id and win_chance columns
         return response()->json(['winChances' => $winChances]);
         // Return the win chances as JSON response

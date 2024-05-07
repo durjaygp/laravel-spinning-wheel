@@ -35,10 +35,10 @@ Route::get('/', [WebController::class, 'spin'])->name('home');
 Route::get('/spinning-wheel/', [WebController::class, 'spinWheel'])->name('home.spin');
 
 
-Route::get('/fetch-win-chances', [GameCaseController::class, 'fetchWinChances']);
+
 Route::post('/save-winning-id', [SpinWinController::class, 'saveWinningId']);
 Route::get('/case-category/{id}', [WebController::class, 'caseCategory'])->name('case.category');
-
+Route::get('/fetch-win-chances/{cate_id}', [GameCaseController::class, 'fetchWinChances']);
 
 Route::get('/blog/{slug}', [WebController::class, 'blogDetails'])->name('home.blog');
 Route::get('/category/{slug}', [WebController::class, 'category'])->name('home.category');
